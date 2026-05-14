@@ -1,0 +1,70 @@
+// Centralized responsive mixins for Admin
+// Usage: @import "mixins"; then @include mixin-name { ... }
+
+// Core breakpoints
+// These follow common device ranges while matching current project usage
+$bp-mobile-max: 575.98px; // <= 575
+$bp-phone-max: 767.98px; // 576 - 767
+$bp-tablet-min: 768px; // 768 - 991
+$bp-tablet-max: 991.98px;
+$bp-desktop-min: 992px; // >= 992
+$bp-md-max: 1080px; // 992 - 1080
+$bp-lg-min: 1200px; // >= 1200
+$bp-xl-min: 1400px; // >= 1400
+$bp-xs-max: 360px; // <= 360
+
+// Provided mixins (kept exactly as requested)
+@mixin for-landscape-phones {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin for-tablets {
+  @media (min-width: 768px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin for-desktops {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin for-middle-devices {
+  @media (min-width: 992px) and (max-width: 1080px) {
+    @content;
+  }
+}
+
+@mixin for-large-desktops {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin for-larger-desktops {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}
+
+@mixin for-mobile {
+  @media (max-width: 575px) {
+    @content;
+  }
+}
+
+// Helpful combined mixins for existing code
+@mixin below-desktop {
+  @media (max-width: #{$bp-tablet-max}) {
+    @content;
+  }
+}
+
+@mixin xs-devices {
+  @media (max-width: #{$bp-xs-max}) {
+    @content;
+  }
+}

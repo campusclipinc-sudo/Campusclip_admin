@@ -1,0 +1,404 @@
+@use "./common/variables" as v;
+
+// ============================================================
+// TNTable — Modern Admin Table
+// ============================================================
+
+.tn-table-container {
+  width: 100%;
+  background: transparent;
+  padding: 0;
+}
+
+.tn-table-card {
+  background: var(--surface);
+  border-radius: v.$radius-xl;
+  box-shadow: v.$shadow-sm;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.tn-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 4px;
+  }
+}
+
+.tn-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+}
+
+// ── Header ────────────────────────────────────────────────
+.tn-table-header {
+  background: var(--surface-muted);
+  border-bottom: 2px solid var(--border);
+}
+
+.tn-table-header-cell {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  border: none;
+
+  &:first-child {
+    padding-left: 24px;
+    border-radius: 0;
+  }
+
+  &:last-child {
+    padding-right: 24px;
+  }
+}
+
+.tn-table-header-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tn-table-sort-icon {
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+    color: var(--primary);
+  }
+}
+
+// ── Body ───────────────────────────────────────────────────
+.tn-table-body {
+  background: var(--surface);
+}
+
+.tn-table-row {
+  border-bottom: 1px solid var(--border);
+  transition: background 140ms ease;
+  position: relative;
+
+  &:hover {
+    background: var(--primary-light);
+
+    .tn-table-cell:first-child {
+      border-left: 3px solid var(--primary);
+      padding-left: 21px;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tn-table-cell {
+  padding: 14px 16px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text);
+  vertical-align: middle;
+  border: none;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:first-child {
+    padding-left: 24px;
+    border-left: 3px solid transparent;
+    transition: border-color 140ms ease, padding 140ms ease;
+  }
+
+  &:last-child {
+    padding-right: 24px;
+  }
+}
+
+// Empty state
+.tn-table-empty {
+  padding: 64px 24px;
+  text-align: center;
+  border-bottom: none;
+}
+
+.tn-table-empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.875rem;
+  gap: 8px;
+
+  &::before {
+    content: "📂";
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.5;
+  }
+}
+
+// ── Pagination ─────────────────────────────────────────────
+.tn-table-pagination {
+  padding: 14px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.tn-table-pagination-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tn-table-pagination-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 180ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: v.$font-family-base;
+
+  &:hover:not(:disabled) {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+  }
+
+  &.active-page {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  }
+
+  &:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    border-color: var(--primary);
+  }
+}
+
+.tn-table-pagination-info {
+  padding: 0 8px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+
+  strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+}
+
+// ── Action Buttons ─────────────────────────────────────────
+.tn-table-action-btn {
+  height: 32px;
+  padding: 0 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 160ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: v.$font-family-base;
+  color: var(--text);
+  background: var(--surface);
+  white-space: nowrap;
+
+  &.tn-table-action-btn-primary {
+    color: v.$primary-500;
+    background: transparent;
+    border-color: rgba(99, 102, 241, 0.4);
+
+    &:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: v.$primary-500;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+    }
+  }
+
+  &.tn-table-action-btn-danger {
+    color: v.$danger-500;
+    background: transparent;
+    border-color: rgba(239, 68, 68, 0.4);
+
+    &:hover:not(:disabled) {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: v.$danger-500;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  }
+}
+
+// ── Dark Theme ──────────────────────────────────────────────
+[data-theme="dark"],
+body[data-theme="dark"] {
+  .tn-table-card {
+    background: v.$dark-surface;
+    border-color: v.$dark-border;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .tn-table,
+  .tn-table-body {
+    background: v.$dark-surface;
+  }
+
+  .tn-table-header {
+    background: v.$dark-surface-muted;
+    border-color: v.$dark-border;
+  }
+
+  .tn-table-header-cell {
+    color: v.$dark-muted;
+  }
+
+  .tn-table-row {
+    border-color: v.$dark-border;
+
+    &:hover {
+      background: rgba(99, 102, 241, 0.08);
+    }
+  }
+
+  .tn-table-cell {
+    color: v.$dark-text;
+  }
+
+  .tn-table-pagination {
+    background: v.$dark-surface-muted;
+    border-color: v.$dark-border;
+  }
+
+  .tn-table-pagination-btn {
+    color: v.$dark-muted;
+    background: v.$dark-surface;
+    border-color: v.$dark-border;
+
+    &:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: v.$dark-primary-600;
+      color: v.$dark-primary-600;
+    }
+
+    &.active-page {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+    }
+  }
+
+  .tn-table-pagination-info {
+    color: v.$dark-muted;
+    strong {
+      color: v.$dark-text;
+    }
+  }
+
+  .tn-table-action-btn {
+    color: v.$dark-text;
+    background: v.$dark-surface;
+    border-color: v.$dark-border;
+
+    &.tn-table-action-btn-primary {
+      color: v.$dark-primary-600;
+      border-color: rgba(129, 140, 248, 0.35);
+
+      &:hover:not(:disabled) {
+        background: rgba(129, 140, 248, 0.1);
+      }
+    }
+
+    &.tn-table-action-btn-danger {
+      color: v.$dark-danger-600;
+      border-color: rgba(248, 113, 113, 0.35);
+
+      &:hover:not(:disabled) {
+        background: rgba(248, 113, 113, 0.1);
+      }
+    }
+  }
+}
+
+// ── Responsive ─────────────────────────────────────────────
+@media (max-width: 768px) {
+  .tn-table-container {
+    padding: 0;
+  }
+
+  .tn-table-header-cell,
+  .tn-table-cell {
+    padding: 12px 12px;
+
+    &:first-child {
+      padding-left: 16px;
+    }
+    &:last-child {
+      padding-right: 16px;
+    }
+  }
+
+  .tn-table-pagination {
+    padding: 12px 16px;
+  }
+
+  .tn-table-pagination-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+    padding: 0 8px;
+  }
+}

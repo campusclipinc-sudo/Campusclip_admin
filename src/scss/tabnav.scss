@@ -1,0 +1,68 @@
+@use "./common/variables" as v;
+
+// ============================================================
+// TabNav — Modern Pill-Style Tabs
+// ============================================================
+
+.tabnav {
+  margin-bottom: 24px;
+}
+
+.tabnav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-muted);
+  border-radius: 12px;
+  padding: 4px;
+  width: fit-content;
+  border: 1px solid var(--border);
+
+  .nav-item {
+    flex-shrink: 0;
+  }
+
+  .nav-link {
+    border: none !important;
+    background: transparent !important;
+    color: var(--muted) !important;
+    padding: 8px 18px !important;
+    border-radius: 9px !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    position: relative;
+    transition: all 180ms ease !important;
+    white-space: nowrap;
+
+    &:hover:not(.active) {
+      color: var(--text) !important;
+      background: rgba(99, 102, 241, 0.06) !important;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35) !important;
+
+      &::after {
+        display: none; // Remove old underline indicator
+      }
+    }
+  }
+}
+
+// Dark theme
+[data-theme="dark"],
+body[data-theme="dark"] {
+  .tabnav-list {
+    background: v.$dark-surface-muted;
+    border-color: v.$dark-border;
+
+    .nav-link {
+      &:hover:not(.active) {
+        color: v.$dark-text !important;
+        background: rgba(99, 102, 241, 0.1) !important;
+      }
+    }
+  }
+}

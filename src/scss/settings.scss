@@ -1,0 +1,148 @@
+@use "./common/mixin" as *;
+@use "./common/variables" as v;
+
+// ============================================================
+// Settings Page
+// ============================================================
+
+.settings-page {
+  .page-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+  }
+
+  .settings-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: v.$radius-xl;
+    box-shadow: v.$shadow-sm;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    }
+  }
+
+  .settings-card-body {
+    padding: 28px;
+
+    @include for-mobile {
+      padding: 16px;
+    }
+  }
+
+  .settings-section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  // Logo upload area
+  .logo-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    border: 2px dashed rgba(99, 102, 241, 0.3);
+    border-radius: v.$radius-lg;
+    background: rgba(99, 102, 241, 0.03);
+    padding: 1rem;
+    transition: border-color 200ms ease, background 200ms ease;
+    cursor: pointer;
+
+    &:hover {
+      border-color: rgba(99, 102, 241, 0.6);
+      background: rgba(99, 102, 241, 0.06);
+    }
+
+    .preview-img {
+      max-height: 90px;
+      object-fit: contain;
+    }
+
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.875rem;
+
+      .upload-icon {
+        font-size: 2rem;
+        opacity: 0.4;
+      }
+    }
+  }
+
+  .settings-field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .field-info {
+      .field-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .field-desc {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+    }
+
+    .field-input {
+      min-width: 180px;
+      max-width: 240px;
+    }
+  }
+
+  @include for-desktops {
+    .settings-card-body {
+      padding: 32px;
+    }
+  }
+}
+
+// ── Dark Theme ──────────────────────────────────────────────
+[data-theme="dark"],
+body[data-theme="dark"] {
+  .settings-page {
+    .settings-card {
+      background: v.$dark-surface;
+      border-color: v.$dark-border;
+    }
+
+    .logo-preview {
+      border-color: rgba(99, 102, 241, 0.25);
+      background: rgba(99, 102, 241, 0.04);
+
+      &:hover {
+        border-color: rgba(99, 102, 241, 0.5);
+        background: rgba(99, 102, 241, 0.08);
+      }
+    }
+  }
+}

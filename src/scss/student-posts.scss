@@ -1,0 +1,250 @@
+@use "./common/variables" as v;
+
+// ============================================================
+// Student Posts / Feed Post Cards
+// ============================================================
+
+.student-posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.feed-post {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: v.$radius-xl;
+  padding: 1.25rem;
+  box-shadow: v.$shadow-sm;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+
+  &:hover {
+    box-shadow: v.$shadow-md;
+    transform: translateY(-2px);
+  }
+
+  // ── Post Header ─────────────────────────────────────────
+  .post-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    margin-bottom: 1rem;
+
+    .post-avatar {
+      flex-shrink: 0;
+
+      .avatar-img {
+        width: 42px;
+        height: 42px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .avatar-placeholder {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+      }
+    }
+
+    .post-meta {
+      flex: 1;
+      min-width: 0;
+
+      .post-author {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--text);
+        margin-bottom: 2px;
+        line-height: 1.4;
+
+        .post-club {
+          color: var(--muted);
+          font-weight: 400;
+        }
+      }
+
+      .post-time {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+    }
+
+    .post-badges {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .privacy-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        border-radius: 20px;
+        background: rgba(99, 102, 241, 0.1);
+        color: #6366f1;
+        border: 1px solid rgba(99, 102, 241, 0.2);
+
+        svg {
+          width: 11px;
+          height: 11px;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+
+  // ── Post Content ────────────────────────────────────────
+  .post-content {
+    margin-bottom: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border);
+
+    p {
+      margin: 0;
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+  }
+
+  // ── Post Image ──────────────────────────────────────────
+  .post-image {
+    margin-bottom: 1rem;
+    border-radius: v.$radius-md;
+    overflow: hidden;
+    border: 1px solid var(--border);
+
+    .post-img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // ── Post Footer ─────────────────────────────────────────
+  .post-footer {
+    gap: 1rem;
+    padding-top: 0.75rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border);
+
+    .d-flex {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      transition: color 160ms ease;
+
+      svg {
+        width: 17px;
+        height: 17px;
+        flex-shrink: 0;
+      }
+
+      span {
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      &.comment-toggle {
+        cursor: pointer;
+        padding: 5px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        transition: all 160ms ease;
+
+        &:hover {
+          background: rgba(99, 102, 241, 0.08);
+          border-color: rgba(99, 102, 241, 0.3);
+          color: #6366f1;
+        }
+      }
+    }
+  }
+
+  // ── Comments ────────────────────────────────────────────
+  .post-comments {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .comment-item {
+      padding: 0.75rem 1rem;
+      background: var(--surface-muted);
+      border-radius: v.$radius-md;
+      border-left: 3px solid #6366f1;
+
+      .comment-content {
+        p {
+          margin: 0;
+          color: var(--text);
+          font-size: 0.86rem;
+          line-height: 1.5;
+        }
+
+        .comment-meta {
+          margin-top: 6px;
+          font-size: 0.73rem;
+          color: var(--muted);
+        }
+      }
+    }
+  }
+}
+
+// ── Dark Theme ──────────────────────────────────────────────
+[data-theme="dark"],
+body[data-theme="dark"] {
+  .feed-post {
+    background: v.$dark-surface;
+    border-color: v.$dark-border;
+
+    .post-content,
+    .post-footer,
+    .post-comments {
+      border-color: v.$dark-border;
+    }
+
+    .comment-item {
+      background: v.$dark-surface-muted;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .feed-post {
+    padding: 1rem;
+    border-radius: v.$radius-lg;
+
+    .post-header {
+      flex-wrap: wrap;
+
+      .post-badges {
+        width: 100%;
+        margin-top: 0.375rem;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

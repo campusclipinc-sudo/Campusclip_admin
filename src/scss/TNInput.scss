@@ -1,0 +1,181 @@
+@use "./common/variables" as v;
+
+// ============================================================
+// TNInput — Modern Form Inputs
+// ============================================================
+
+.custom-input {
+  position: relative;
+
+  label,
+  .field-label,
+  .form-label {
+    color: var(--text) !important;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 7px;
+  }
+
+  .form-control {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border: 1.5px solid var(--border) !important;
+    caret-color: v.$primary-500;
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.875rem;
+    transition: border-color 160ms ease, box-shadow 160ms ease,
+      background 160ms ease;
+  }
+
+  textarea.form-control {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .form-control::placeholder {
+    color: var(--muted) !important;
+    font-size: 0.85rem;
+  }
+
+  // React Select
+  .react-select-prefix {
+    &__control {
+      background: var(--surface) !important;
+      border: 1.5px solid var(--border) !important;
+      border-radius: 10px !important;
+      color: var(--text) !important;
+      min-height: 40px;
+      box-shadow: none !important;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+
+      &--is-focused {
+        border-color: v.$primary-500 !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18) !important;
+      }
+
+      &:hover {
+        border-color: rgba(99, 102, 241, 0.4) !important;
+      }
+    }
+
+    &__single-value { color: var(--text) !important; }
+    &__indicator,
+    &__dropdown-indicator,
+    &__clear-indicator { color: var(--muted) !important; }
+    &__value-container { color: var(--text) !important; }
+    &__placeholder { color: var(--muted) !important; font-size: 0.85rem; }
+    &__input { color: var(--text) !important; }
+
+    &__menu {
+      background: var(--surface) !important;
+      z-index: 1000;
+      border: 1px solid var(--border) !important;
+      border-radius: 12px !important;
+      overflow: hidden;
+      box-shadow: v.$shadow-lg !important;
+    }
+
+    &__option {
+      color: var(--text) !important;
+      font-size: 0.875rem;
+
+      &--is-selected {
+        background: rgba(99, 102, 241, 0.15) !important;
+        color: v.$primary-500 !important;
+        font-weight: 600;
+      }
+
+      &--is-focused {
+        background: rgba(99, 102, 241, 0.08) !important;
+      }
+    }
+  }
+
+  .eye-icon {
+    top: 43px !important;
+    right: 14px !important;
+    cursor: pointer;
+    color: var(--muted);
+    position: absolute;
+    transition: color 160ms ease;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  .search-icon {
+    top: 14px !important;
+    left: 14px !important;
+    color: var(--muted);
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+// Global focus ring
+.form-control:focus {
+  border-color: v.$primary-500 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18) !important;
+  background: var(--surface) !important;
+}
+
+// ── Dark Theme ──────────────────────────────────────────────
+[data-theme="dark"],
+body[data-theme="dark"] {
+  .custom-input {
+    .form-control {
+      background: v.$dark-surface-elev !important;
+      color: v.$dark-text !important;
+      border-color: v.$dark-border !important;
+    }
+    .form-control::placeholder {
+      color: v.$dark-muted !important;
+    }
+    .eye-icon,
+    .search-icon {
+      color: v.$dark-muted;
+    }
+
+    .react-select-prefix {
+      &__control {
+        background: v.$dark-surface-elev !important;
+        border-color: v.$dark-border !important;
+
+        &--is-focused {
+          border-color: v.$dark-primary-600 !important;
+          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+        }
+      }
+      &__single-value { color: v.$dark-text !important; }
+      &__indicator,
+      &__dropdown-indicator,
+      &__clear-indicator { color: v.$dark-muted !important; }
+      &__value-container { color: v.$dark-text !important; }
+      &__placeholder { color: v.$dark-muted !important; }
+      &__input { color: v.$dark-text !important; }
+      &__menu {
+        background: v.$dark-surface !important;
+        border-color: v.$dark-border !important;
+        color: v.$dark-text !important;
+      }
+      &__option {
+        color: v.$dark-text !important;
+        &--is-selected {
+          background: rgba(99, 102, 241, 0.2) !important;
+          color: v.$dark-primary-600 !important;
+        }
+        &--is-focused {
+          background: rgba(99, 102, 241, 0.1) !important;
+        }
+      }
+    }
+  }
+
+  .form-control:focus {
+    border-color: v.$dark-primary-600 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+  }
+}

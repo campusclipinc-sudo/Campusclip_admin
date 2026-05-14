@@ -1,0 +1,109 @@
+@use "./common/mixin" as *;
+@use "./common/variables" as v;
+
+// ============================================================
+// Profile / Edit Profile Page
+// ============================================================
+
+.edit-profile-page {
+  .page-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+  }
+
+  .page-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: v.$radius-xl;
+    box-shadow: v.$shadow-sm;
+    overflow: hidden;
+
+    // Top gradient accent strip
+    &::before {
+      content: "";
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    }
+  }
+
+  .profile-avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+
+    .avatar-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .avatar-info {
+      .avatar-name {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--text);
+      }
+      .avatar-role {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .form-section {
+    padding: 24px;
+  }
+
+  .form-label {
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  @include for-mobile {
+    .profile-card .form-section {
+      padding: 16px;
+    }
+  }
+
+  @include for-desktops {
+    .profile-card .form-section {
+      padding: 28px;
+    }
+  }
+}
+
+// ── Dark theme ──────────────────────────────────────────────
+[data-theme="dark"],
+body[data-theme="dark"] {
+  .edit-profile-page {
+    .profile-card {
+      background: v.$dark-surface;
+      border-color: v.$dark-border;
+    }
+  }
+}
